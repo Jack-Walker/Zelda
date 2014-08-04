@@ -10,11 +10,13 @@ public class Player : MonoBehaviour
         Rolling
     };
     public UnityEngine.Camera mainCamera;
+    private CameraController cameraController;
     public LinkStates state;
 	// Use this for initialization
 	void Start () 
     {
         mainCamera = GameObject.Find("PositionCam/DefaultCam").camera;
+        cameraController = GameObject.Find("SC_Camera").GetComponent<CameraController>();
 	}
 	
 	// Update is called once per frame
@@ -48,20 +50,33 @@ public class Player : MonoBehaviour
          cameraEulerAngles.z = 0;
         if (Input.GetKey(KeyCode.W))
         {
-            transform.eulerAngles = cameraEulerAngles;
+            if (cameraController.isZTargeting)
+                transform.position += (mainCamera.transform.forward * 4.0f) * Time.deltaTime;
+            else
+                transform.eulerAngles = cameraEulerAngles;
         }
         if (Input.GetKey(KeyCode.S))
         {
-            transform.eulerAngles = cameraEulerAngles + new Vector3(0, 180, 0);
+            if (cameraController.isZTargeting)
+                transform.position += (mainCamera.transform.forward * -4.0f) * Time.deltaTime;
+            else
+                transform.eulerAngles = cameraEulerAngles + new Vector3(0, 180, 0);
         }
         if (Input.GetKey(KeyCode.A))
         {
-            transform.eulerAngles = cameraEulerAngles - new Vector3(0, 90, 0);
+            if (cameraController.isZTargeting)
+                transform.position += (mainCamera.transform.right * -4.0f) * Time.deltaTime;
+            else
+                transform.eulerAngles = cameraEulerAngles - new Vector3(0, 90, 0);
         }
         if (Input.GetKey(KeyCode.D))
         {
-            transform.eulerAngles = cameraEulerAngles + new Vector3(0, 90, 0);
+            if (cameraController.isZTargeting)
+                transform.position += (mainCamera.transform.right * 4.0f) * Time.deltaTime;
+            else
+                transform.eulerAngles = cameraEulerAngles + new Vector3(0, 90, 0);
         }
-        transform.position += (transform.forward * 4.0f) * Time.deltaTime;
+        if (!cameraController.isZTargeting)
+            transform.position += (transform.forward * 4.0f) * Time.deltaTime;
     }
 }

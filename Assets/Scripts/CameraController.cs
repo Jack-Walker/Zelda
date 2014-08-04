@@ -5,7 +5,7 @@ public class CameraController : MonoBehaviour
 {
     private Player player;
     private float cameraTurnDelay;
-
+    public bool isZTargeting;
 	// Use this for initialization
 	void Start () 
     {
@@ -15,12 +15,41 @@ public class CameraController : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
     {
+        CameraFollowPlayer();
+        CameraTurnCheck();
+        CameraInputCheck();
+        CameraZTarget();
+	}
+
+    void CameraInputCheck()
+    {
+        // Z-Targeting
+        if (Input.GetKey(KeyCode.Z))
+        {
+            isZTargeting = true;
+        }
+        else
+        {
+            isZTargeting = false;
+        }
+    }
+
+    void CameraZTarget()
+    {
+        if (isZTargeting == true)
+        {
+            transform.eulerAngles = player.transform.eulerAngles;
+        }
+    }
+
+
+    void CameraFollowPlayer()
+    {
         transform.position = player.transform.position + (transform.forward * -5.5f) + (transform.up * 2.0f);
         Vector3 eulerAngles = transform.eulerAngles;
         eulerAngles.x = 20 + (Mathf.Abs(player.transform.position.x - transform.position.x));
         transform.eulerAngles = eulerAngles;
-        CameraTurnCheck();
-	}
+    }
 
     void CameraTurnCheck()
     {
@@ -34,11 +63,11 @@ public class CameraController : MonoBehaviour
             }
             if (transform.eulerAngles.y > player.transform.eulerAngles.y)
             {
-                transform.eulerAngles -= new Vector3(0, 1, 0);
+                transform.eulerAngles -= new Vector3(0, 2, 0);
             }
             if (transform.eulerAngles.y < player.transform.eulerAngles.y)
             {
-                transform.eulerAngles += new Vector3(0, 1, 0);
+                transform.eulerAngles += new Vector3(0, 2, 0);
             }
         }
     }

@@ -7639,6 +7639,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddb96db3adc81ce42b3f706ccf5161f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isZTargetting: 0
 --- !u!1 &1963166616
 GameObject:
   m_ObjectHideFlags: 0

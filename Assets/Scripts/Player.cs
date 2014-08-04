@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+// Script by Jack Walker
 public class Player : MonoBehaviour 
 {
     public enum LinkStates
@@ -13,14 +14,14 @@ public class Player : MonoBehaviour
     private CameraController cameraController;
     public LinkStates state;
 	// Use this for initialization
-	void Start () 
+	void Start() 
     {
         mainCamera = GameObject.Find("PositionCam/DefaultCam").camera;
         cameraController = GameObject.Find("SC_Camera").GetComponent<CameraController>();
 	}
 	
 	// Update is called once per frame
-	void FixedUpdate () 
+	void FixedUpdate() 
     {
 	    switch (state)
         {

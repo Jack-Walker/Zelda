@@ -130,6 +130,31 @@ ModelImporter:
     4300044: ob_03000770
     4300046: ob_03000500
     4300048: ob_03000250
+    6400000: ob_03000250
+    6400002: ob_03000500
+    6400004: ob_03000770
+    6400006: ob_03000A20
+    6400008: ob_03000C90
+    6400010: ob_030020B0
+    6400012: ob_03002D48
+    6400014: ob_03002E18
+    6400016: ob_03002F98
+    6400018: ob_03003438
+    6400020: ob_03003738
+    6400022: ob_03003988
+    6400024: ob_03003A08
+    6400026: ob_03003A48
+    6400028: ob_03003A88
+    6400030: ob_03003AC8
+    6400032: ob_03003B08
+    6400034: ob_03003B48
+    6400036: ob_030042F0
+    6400038: ob_03004718
+    6400040: ob_03004D78
+    6400042: ob_030059D0
+    6400044: ob_03005EB0
+    6400046: ob_030060B8
+    6400048: ob_03008E90
     7400000: Default Take
     9500000: //RootNode
   materials:
@@ -153,7 +178,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: .00999999978
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     importBlendShapes: 1
     swapUVChannels: 0
     generateSecondaryUV: 0

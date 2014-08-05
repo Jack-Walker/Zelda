@@ -27,6 +27,8 @@ public class ItemMenu : MonoBehaviour
     {
 	    if (Input.GetKeyDown(KeyCode.Return))
         {
+            if (hud.rotSpeed != 0.0f)
+                return;
             camera.enabled = !camera.enabled;
             if (camera.enabled)
             {

@@ -2292,6 +2292,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcddf4390ac12f242bf796baf08b09d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotSpeed: 0
 --- !u!1 &391215726
 GameObject:
   m_ObjectHideFlags: 0
@@ -3013,7 +3014,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 596039751}
   m_LocalRotation: {x: 0, y: .829026282, z: 0, w: -.559209645}
-  m_LocalPosition: {x: -23.4787693, y: 1.59144783, z: -.622152805}
+  m_LocalPosition: {x: -24.9664593, y: 1.65165472, z: 3.0604403}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1183041168}
@@ -3032,6 +3033,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 1399553426}
   state: 0
+  lastPosition: {x: 0, y: 0, z: 0}
 --- !u!65 &596039754
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3042,7 +3044,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 3, z: 1}
+  m_Size: {x: .800000012, y: 3, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &596039755
 Rigidbody:
@@ -3058,7 +3060,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 80
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!43 &603727667
 Mesh:
   m_ObjectHideFlags: 0
@@ -4944,6 +4946,14 @@ Prefab:
     - target: {fileID: 6400048, guid: 765b25b7e29f0ee4c88f216c6abdfab7, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6400044, guid: 765b25b7e29f0ee4c88f216c6abdfab7, type: 3}
+      propertyPath: m_SmoothSphereCollisions
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6400044, guid: 765b25b7e29f0ee4c88f216c6abdfab7, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 765b25b7e29f0ee4c88f216c6abdfab7, type: 3}

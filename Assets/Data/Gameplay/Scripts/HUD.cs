@@ -8,11 +8,11 @@ public class HUD : MonoBehaviour
 	private Camera guiCam;
 	private Transform menu;
 
-	private float rotSpeed = 0.0f;
+	public float rotSpeed = 0.0f;
 	private float rotation = 0.0f;
 	private float targetRot = 0.0f;
 
-
+    AudioSource[] menuSounds;
 
 	void Start()
 	{
@@ -82,6 +82,14 @@ public class HUD : MonoBehaviour
 				}
 			}
 		}
+
+        // Initialize sound effects
+        menuSounds = new AudioSource[2];
+        menuSounds[0] = gameObject.AddComponent<AudioSource>();
+        menuSounds[0].clip = Resources.Load<AudioClip>("Audio/SFX/Menus/OOT_PauseMenu_Turn_Left");
+        menuSounds[1] = gameObject.AddComponent<AudioSource>();
+        menuSounds[1].clip = Resources.Load<AudioClip>("Audio/SFX/Menus/OOT_PauseMenu_Turn_Right");
+
 	}
 	
 	void Update()
@@ -100,11 +108,13 @@ public class HUD : MonoBehaviour
 				{
 					rotSpeed = 120.0f;
 					targetRot = rotation + 90.0f;
+                    menuSounds[0].Play();
 				}
 				else if (Input.GetKeyDown(KeyCode.S))
 				{
 					rotSpeed = -120.0f;
 					targetRot = rotation - 90.0f;
+                    menuSounds[1].Play();
 				}
 			}
 			else if (!Mathf.Approximately(rotation, targetRot))

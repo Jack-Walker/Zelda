@@ -28,7 +28,6 @@ public class CameraController : MonoBehaviour
         CameraInputCheck();
         CameraZTarget();
 	}
-
     void CameraInputCheck()
     {
         // Z-Targeting
@@ -47,7 +46,6 @@ public class CameraController : MonoBehaviour
             isZTargeting = false;
         }
     }
-
     void CameraZTarget()
     {
         if (isZTargeting == true)
@@ -55,11 +53,9 @@ public class CameraController : MonoBehaviour
             transform.eulerAngles = player.transform.eulerAngles;
         }
     }
-
-
     void CameraFollowPlayer()
     {
-        transform.position = player.transform.position + (transform.forward * -7.5f) + (transform.up * 1.0f);
+        transform.position = player.transform.position + (transform.forward * -3.3f) + (transform.up * 0.0f);
         Vector3 eulerAngles = transform.eulerAngles;
         eulerAngles.x = 20 + (Mathf.Abs(player.transform.position.x - transform.position.x));
         transform.eulerAngles = eulerAngles;

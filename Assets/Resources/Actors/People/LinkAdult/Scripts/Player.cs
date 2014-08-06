@@ -11,16 +11,32 @@ public class Player : MonoBehaviour
         Rolling,
         Falling
     };
+    public enum LinkSoundsEnum
+    {
+        Step0,
+        Step1,
+        Step2
+    };
     public UnityEngine.Camera mainCamera;
     private CameraController cameraController;
     public LinkStates state;
     public Vector3 lastPosition;
+    private AudioSource[] linkSounds = new AudioSource[8];
+    private int stepCounter = 0;
 	// Use this for initialization
 	void Start() 
     {
         mainCamera = GameObject.Find("PositionCam/DefaultCam").camera;
         cameraController = GameObject.Find("SC_Camera").GetComponent<CameraController>();
         lastPosition = transform.position;
+        
+        // Load sound effects
+        linkSounds[(int)LinkSoundsEnum.Step0] = gameObject.AddComponent<AudioSource>();
+        linkSounds[(int)LinkSoundsEnum.Step0].clip = Resources.Load<AudioClip>("Audio/SFX/Footsteps/OOT_Steps_Dirt1");
+        linkSounds[(int)LinkSoundsEnum.Step1] = gameObject.AddComponent<AudioSource>();
+        linkSounds[(int)LinkSoundsEnum.Step1].clip = Resources.Load<AudioClip>("Audio/SFX/Footsteps/OOT_Steps_Dirt2");
+        linkSounds[(int)LinkSoundsEnum.Step2] = gameObject.AddComponent<AudioSource>();
+        linkSounds[(int)LinkSoundsEnum.Step2].clip = Resources.Load<AudioClip>("Audio/SFX/Footsteps/OOT_Steps_Dirt3");
 	}
 	
 	// Update is called once per frame
@@ -104,6 +120,13 @@ public class Player : MonoBehaviour
         //Debug.Log("Mid " + midRaycast);
     }
 
+    void StepSFX()
+    {
+        stepCounter++;
+        if (linkSounds[stepCounter % 2].isPlaying == false)
+            linkSounds[stepCounter % 2].Play();
+    }
+
     void UpdateIdle()
     {
         if (Input.GetKey(KeyCode.W) || (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)))
@@ -117,6 +140,7 @@ public class Player : MonoBehaviour
 
 		if (h == 0.0f && v == 0.0f)
 			state = LinkStates.Idle;
+        StepSFX();
 		ObstacleTest();
 		Vector3 cameraEulerAngles = mainCamera.transform.eulerAngles;
 		cameraEulerAngles.x = 0;

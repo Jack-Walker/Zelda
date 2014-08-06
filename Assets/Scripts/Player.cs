@@ -15,12 +15,15 @@ public class Player : MonoBehaviour
     private CameraController cameraController;
     public LinkStates state;
     public Vector3 lastPosition;
+    public int health, maxHealth;
 	// Use this for initialization
 	void Start() 
     {
         mainCamera = GameObject.Find("PositionCam/DefaultCam").camera;
         cameraController = GameObject.Find("SC_Camera").GetComponent<CameraController>();
         lastPosition = transform.position;
+        maxHealth = 12;
+        health = maxHealth;
 	}
 	
 	// Update is called once per frame
@@ -42,7 +45,8 @@ public class Player : MonoBehaviour
 	}
 
     void OnCollisionEnter(Collision other)
-    {   
+    {
+        
     }
 
     void FallCheck()
@@ -77,11 +81,8 @@ public class Player : MonoBehaviour
         {
             if (hitTop.collider.gameObject.name.Contains("ob"))
             {
-                Debug.Log("toppt");
-                Debug.Log("Topmost " + hitTopMost.distance);
-                Debug.Log("Top " + hitTop.distance);
-                Debug.Log("Mid " + hitMid.distance);
-                transform.position += (transform.forward * 1.0f) + (transform.up * 2.5f);
+                Debug.Log("Toppoint obstacle");
+                 transform.position += (transform.forward * 1.0f) + (transform.up * 2.5f);
             }
         }
         // Mid ray
@@ -89,16 +90,13 @@ public class Player : MonoBehaviour
         {
             if (hitMid.collider.gameObject.name.Contains("ob"))
             {
-                Debug.Log("midpt");
+                Debug.Log("Midpoint obstacle");
                 transform.position += (transform.forward * 1.0f) + (transform.up * 0.80f);
             }
         }
-        Debug.Log("Topmost " + hitTopMost.distance);
-        Debug.Log("Top " + hitTop.distance);
-        Debug.Log("Mid " + hitMid.distance);
-
-
-
+        //Debug.Log("Topmost " + hitTopMost.distance);
+        //Debug.Log("Top " + hitTop.distance);
+        //Debug.Log("Mid " + hitMid.distance);
         //Debug.Log("Topmost " + topmostRaycast);
         //Debug.Log("Top " + topRaycast);
         //Debug.Log("Mid " + midRaycast);

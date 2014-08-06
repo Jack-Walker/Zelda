@@ -75,11 +75,11 @@ public class CameraController : MonoBehaviour
                 cameraTurnDelay = Time.time + 0.8f;
                 return;
             }
-            if (transform.eulerAngles.y > player.transform.eulerAngles.y)
+            if (transform.eulerAngles.y > player.transform.eulerAngles.y && (transform.eulerAngles.y - player.transform.eulerAngles.y) > (player.transform.eulerAngles.y - transform.eulerAngles.y))
             {
                 transform.eulerAngles -= new Vector3(0, 2, 0);
             }
-            if (transform.eulerAngles.y < player.transform.eulerAngles.y)
+            if (transform.eulerAngles.y < player.transform.eulerAngles.y && (transform.eulerAngles.y - player.transform.eulerAngles.y) < (player.transform.eulerAngles.y - transform.eulerAngles.y))
             {
                 transform.eulerAngles += new Vector3(0, 2, 0);
             }

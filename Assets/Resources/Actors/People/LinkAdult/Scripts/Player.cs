@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
         Step2
     };
     public UnityEngine.Camera mainCamera;
-    private CameraController cameraController;
+    private MainCamera cameraController;
     public LinkStates state;
     public Vector3 lastPosition;
     private AudioSource[] linkSounds = new AudioSource[8];
@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
 	void Start() 
     {
         mainCamera = GameObject.Find("PositionCam/DefaultCam").camera;
-        cameraController = GameObject.Find("SC_Camera").GetComponent<CameraController>();
+        cameraController = GameObject.Find("SC_Camera").GetComponent<MainCamera>();
         lastPosition = transform.position;
         
         // Load sound effects
@@ -147,7 +147,7 @@ public class Player : MonoBehaviour
 		cameraEulerAngles.z = 0;
 		if (v != 0.0f)
 		{
-			if (cameraController.isZTargeting)
+			if (cameraController.isTargeting)
 				transform.position += (mainCamera.transform.forward * v * 4.0f) * Time.deltaTime;
 			else
 			{
@@ -159,7 +159,7 @@ public class Player : MonoBehaviour
 		}
 		if (h != 0.0f)
         {
-            if (cameraController.isZTargeting)
+            if (cameraController.isTargeting)
                 transform.position += (mainCamera.transform.right * h * 4.0f) * Time.deltaTime;
             else
 			{
@@ -169,7 +169,7 @@ public class Player : MonoBehaviour
 					transform.eulerAngles = cameraEulerAngles + new Vector3(0, 90, 0);
 			}
         }
-        if (!cameraController.isZTargeting)
+        if (!cameraController.isTargeting)
             transform.position += (transform.forward * 4.0f) * Time.deltaTime;
     }
 }

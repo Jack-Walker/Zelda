@@ -16,6 +16,10 @@ public class HUD : MonoBehaviour
     private float scaleBoost, scaleDir;
     private Vector3 baseScale = new Vector3(2.196093f, 2.736454f, 0.9999999f);
     private int playerOldHearts;
+    public Player.LinkStates oldPlayerState;
+    private int aBoost;
+    private bool aFlip = false;
+
 
     AudioSource[] menuSounds;
 
@@ -123,6 +127,7 @@ public class HUD : MonoBehaviour
             if (menu != null)
                 menu.localScale = new Vector3(guiCam.aspect, 1, guiCam.aspect);
             DrawHearts();
+            AButtonDraw();
         }
         if (menu != null)
         {
@@ -171,6 +176,39 @@ public class HUD : MonoBehaviour
                     rotSpeed = 0.0f;
             }
         }
+    }
+
+    // Todo: Clean code.
+    void AButtonDraw()
+    {
+        GameObject aButtonObject = GameObject.Find("AButton");
+        //GameObject aButtonTextObject = GameObject.Find("AButtonText");
+
+        if (aFlip == false)
+        {
+            if (player.state != oldPlayerState)
+            {
+                aFlip = true;
+                aBoost = 1;
+                aButtonObject.transform.Rotate(3, 0, 0);
+                oldPlayerState = player.state;
+            }
+        }
+        if (aFlip == true)
+        {
+            if (aButtonObject.transform.localEulerAngles.x >= 90)
+            {
+                aBoost = -1;
+            }
+            if (aButtonObject.transform.localEulerAngles.x <= 1)
+            {
+                aBoost = 1;
+                aFlip = false;
+                return;
+            }
+            aButtonObject.transform.Rotate(aBoost, 0, 0);
+        }
+        oldPlayerState = player.state;
     }
 
     void DrawHearts()

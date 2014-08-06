@@ -23,12 +23,15 @@ public class Player : MonoBehaviour
     public Vector3 lastPosition;
     private AudioSource[] linkSounds = new AudioSource[8];
     private int stepCounter = 0;
+    public int health, maxHealth;
 	// Use this for initialization
 	void Start() 
     {
         mainCamera = GameObject.Find("PositionCam/DefaultCam").camera;
         cameraController = GameObject.Find("SC_Camera").GetComponent<MainCamera>();
         lastPosition = transform.position;
+        maxHealth = 12;
+        health = maxHealth;
         
         // Load sound effects
         linkSounds[(int)LinkSoundsEnum.Step0] = gameObject.AddComponent<AudioSource>();
@@ -109,9 +112,9 @@ public class Player : MonoBehaviour
                 transform.position += (transform.forward * 1.0f) + (transform.up * 0.80f);
             }
         }
-        Debug.Log("Topmost " + hitTopMost.distance);
-        Debug.Log("Top " + hitTop.distance);
-        Debug.Log("Mid " + hitMid.distance);
+        //Debug.Log("Topmost " + hitTopMost.distance);
+        //Debug.Log("Top " + hitTop.distance);
+        //Debug.Log("Mid " + hitMid.distance);
 
 
 

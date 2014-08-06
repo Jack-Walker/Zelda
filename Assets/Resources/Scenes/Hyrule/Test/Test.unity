@@ -2254,7 +2254,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 376346980}
   - 114: {fileID: 376346981}
-  - 114: {fileID: 376346982}
   m_Layer: 5
   m_Name: HUD
   m_TagString: Untagged
@@ -2292,18 +2291,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcddf4390ac12f242bf796baf08b09d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isShowing: 0
   rotSpeed: 0
---- !u!114 &376346982
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 376346979}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c816bb614a891a4eb98d2a5c6b76f0f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &391215726
 GameObject:
   m_ObjectHideFlags: 0
@@ -2344,7 +2333,6 @@ GameObject:
   - 4: {fileID: 397934232}
   - 20: {fileID: 397934235}
   - 124: {fileID: 397934234}
-  - 114: {fileID: 397934233}
   m_Layer: 0
   m_Name: AlphaCam
   m_TagString: Untagged
@@ -2365,17 +2353,6 @@ Transform:
   - {fileID: 367938086}
   m_Father: {fileID: 636649898}
   m_RootOrder: 1
---- !u!114 &397934233
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 397934231}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a8e4b1cccef74040ade88fc383eeddd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!124 &397934234
 Behaviour:
   m_ObjectHideFlags: 0
@@ -2391,7 +2368,7 @@ Camera:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 397934231}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 4
   m_BackGroundColor: {r: .192156866, g: .301960796, b: .474509805, a: .0196078438}
@@ -3045,8 +3022,6 @@ MonoBehaviour:
   mainCamera: {fileID: 1399553426}
   state: 0
   lastPosition: {x: 0, y: 0, z: 0}
-  health: 0
-  maxHealth: 0
 --- !u!65 &596039754
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6616,7 +6591,6 @@ GameObject:
   - 4: {fileID: 1466440060}
   - 20: {fileID: 1466440064}
   - 92: {fileID: 1466440062}
-  - 114: {fileID: 1466440061}
   m_Layer: 0
   m_Name: GUICam
   m_TagString: Untagged
@@ -6637,17 +6611,6 @@ Transform:
   - {fileID: 376346980}
   m_Father: {fileID: 818828481}
   m_RootOrder: 2
---- !u!114 &1466440061
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1466440059}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c816bb614a891a4eb98d2a5c6b76f0f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!92 &1466440062
 Behaviour:
   m_ObjectHideFlags: 0

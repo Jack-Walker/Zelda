@@ -189,8 +189,8 @@ public class HUD : MonoBehaviour
             if (player.state != oldPlayerState)
             {
                 aFlip = true;
-                aBoost = 1;
-                aButtonObject.transform.Rotate(3, 0, 0);
+                aBoost = 4;
+                aButtonObject.transform.Rotate(7, 0, 0);
                 oldPlayerState = player.state;
             }
         }
@@ -198,11 +198,11 @@ public class HUD : MonoBehaviour
         {
             if (aButtonObject.transform.localEulerAngles.x >= 90)
             {
-                aBoost = -1;
+                aBoost = -4;
             }
-            if (aButtonObject.transform.localEulerAngles.x <= 1)
+            if (aButtonObject.transform.localEulerAngles.x <= 4)
             {
-                aBoost = 1;
+                aBoost = 4;
                 aFlip = false;
                 return;
             }

@@ -19,6 +19,9 @@ public class HUD : MonoBehaviour
     private Vector3 baseScale = new Vector3(15.0f, 15.0f, 1.0f);
     private int playerOldHearts;
     private int itemMenuCursor = 0;
+    public Player.LinkStates oldPlayerState;
+    private int aBoost;
+    private bool aFlip = false;
 
     AudioSource[] menuSounds;
 
@@ -128,6 +131,7 @@ public class HUD : MonoBehaviour
             if (menu != null)
                 menu.localScale = new Vector3(guiCam.aspect, 1, guiCam.aspect);
             DrawHearts();
+            AButtonDraw();
         }
         if (menu != null)
         {
@@ -178,9 +182,38 @@ public class HUD : MonoBehaviour
         }
     }
 
-    void UpdateCursor()
-    {
 
+    // Todo: Clean code.
+    void AButtonDraw()
+    {
+        GameObject aButtonObject = GameObject.Find("AButton");
+        //GameObject aButtonTextObject = GameObject.Find("AButtonText");
+
+        if (aFlip == false)
+        {
+            if (player.state != oldPlayerState)
+            {
+                aFlip = true;
+                aBoost = 2;
+                aButtonObject.transform.Rotate(7, 0, 0);
+                oldPlayerState = player.state;
+            }
+        }
+        if (aFlip == true)
+        {
+            if (aButtonObject.transform.localEulerAngles.x >= 90)
+            {
+                aBoost = -4;
+            }
+            if (aButtonObject.transform.localEulerAngles.x <= 4)
+            {
+                aBoost = 4;
+                aFlip = false;
+                return;
+            }
+            aButtonObject.transform.Rotate(aBoost, 0, 0);
+        }
+        oldPlayerState = player.state;
     }
 
 

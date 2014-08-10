@@ -197,6 +197,18 @@ function Start () {
 	}
 }
 
+function SetCursorColor(desiredColor : Color32)
+{
+	var spriteRenderer1 : SpriteRenderer = GameObject.Find("Item Menu Cursor/Cursor 1").GetComponent(SpriteRenderer);
+	var spriteRenderer2 : SpriteRenderer = GameObject.Find("Item Menu Cursor/Cursor 2").GetComponent(SpriteRenderer);
+	var spriteRenderer3 : SpriteRenderer = GameObject.Find("Item Menu Cursor/Cursor 3").GetComponent(SpriteRenderer);
+	var spriteRenderer4 : SpriteRenderer = GameObject.Find("Item Menu Cursor/Cursor 4").GetComponent(SpriteRenderer);
+	spriteRenderer1.color = desiredColor;
+   	spriteRenderer2.color = desiredColor;
+   	spriteRenderer3.color = desiredColor;
+   	spriteRenderer4.color = desiredColor;
+}
+
 function InitCursor()
 {
 	var itemPanel : GameObject = GameObject.Find("PauseMenu/Select/Items");
@@ -212,7 +224,6 @@ function InitCursor()
 	cursorObject1.transform.localScale = Vector3(1, 1, 1);
     var spriteRenderer1 : SpriteRenderer = cursorObject1.AddComponent(SpriteRenderer);
     spriteRenderer1.sprite = Resources.Load("Data/Gameplay/Textures/ItemCursor", Sprite);
-    spriteRenderer1.color = new Color32(254, 254, 0, 255);
     cursorObject1.name = "Cursor 1";
     cursorObject1.layer = 1;
     
@@ -222,7 +233,6 @@ function InitCursor()
     cursorObject2.transform.localEulerAngles = Vector3(0, 0, 0);
     var spriteRenderer2 : SpriteRenderer = cursorObject2.AddComponent(SpriteRenderer);
     spriteRenderer2.sprite = Resources.Load("Data/Gameplay/Textures/ItemCursor", Sprite);
-    spriteRenderer2.color = new Color32(254, 254, 0, 255);
     cursorObject2.transform.localScale = Vector3(1, 1, 1);
     cursorObject2.transform.localEulerAngles = Vector3(180, 0, 0);
     cursorObject2.transform.localPosition = Vector3(0, 0.1, 0);
@@ -233,7 +243,6 @@ function InitCursor()
     cursorObject3.transform.parent = cursorObjectParent.transform;
     var spriteRenderer3 : SpriteRenderer = cursorObject3.AddComponent(SpriteRenderer);
     spriteRenderer3.sprite = Resources.Load("Data/Gameplay/Textures/ItemCursor", Sprite);
-    spriteRenderer3.color = new Color32(254, 254, 0, 255);
     cursorObject3.transform.localScale = Vector3(1, 1, 1);
     cursorObject3.transform.localEulerAngles = Vector3(0, 180, 0);
     cursorObject3.transform.localPosition = Vector3(-0.1, 0.0, 0);
@@ -244,7 +253,6 @@ function InitCursor()
     cursorObject4.transform.parent = cursorObjectParent.transform;
     var spriteRenderer4 : SpriteRenderer = cursorObject4.AddComponent(SpriteRenderer);
     spriteRenderer4.sprite = Resources.Load("Data/Gameplay/Textures/ItemCursor", Sprite);
-    spriteRenderer4.color = new Color32(254, 254, 0, 255);
     cursorObject4.transform.localScale = Vector3(1, 1, 1);
     cursorObject4.transform.localEulerAngles = Vector3(0, 0, 180);
     cursorObject4.transform.localPosition = Vector3(-0.1, 0.1, 0);
@@ -257,16 +265,19 @@ function InitCursor()
 
 function UpdateCursor()
 {
+	// TODO: Clean up this code. It's really messy.
 	var pauseMenu : GameObject = GameObject.Find("PauseMenu");
 	var cursorObjectParent : GameObject = GameObject.Find("Item Menu Cursor");
-    if (pauseMenu.transform.localEulerAngles.y == 270) // Item menu
+	if (pauseMenu.transform.localEulerAngles.y == 270) // Item menu
     {
     	var itemPanel : GameObject = GameObject.Find("PauseMenu/Select/Items");
     	cursorObjectParent.transform.parent = itemPanel.transform;
     	cursorObjectParent.transform.localPosition = Vector3(-48-(32*(cursorPosition%6)),-34-(32*(Mathf.Floor(cursorPosition/6))),0.1);
 	    cursorObjectParent.transform.localScale = Vector3(112, 122, 1);
    	    cursorObjectParent.transform.localEulerAngles = Vector3(180, 180, 0);
-	    if (Input.GetKeyDown(KeyCode.LeftArrow))
+   	    
+   	    SetCursorColor(Color32(254, 254, 0, 255));
+   	    if (Input.GetKeyDown(KeyCode.LeftArrow))
 	    {
 	    	if (!cursorChangeSound.isPlaying)
 	    	{
@@ -329,6 +340,7 @@ function UpdateCursor()
 		cursorObjectParent.transform.localPosition = Vector3(qsX[cursorPosition]-35,-1*(qsY[cursorPosition]-25),-0.1);
 		cursorObjectParent.transform.localEulerAngles = Vector3(0,180,0);
 		cursorObjectParent.transform.localScale = Vector3(itemSize * 4,itemSize * 4,1);
+		SetCursorColor(Color32(255, 255, 255, 255));
 		
 		if (cursorPosition > 24)
 		    		cursorPosition = 0;
@@ -362,8 +374,11 @@ function UpdateCursor()
     {
     	var equipmentPanel : GameObject = GameObject.Find("PauseMenu/Equip/Items");
     	var xOffset = 2;
+    	SetCursorColor(Color32(0, 254, 50, 255));
+  
     	if (cursorPosition%4 == 0) {
 			xOffset = 26;
+			SetCursorColor(Color32(255, 255, 255, 255));
 		} else {
 			xOffset = 154+(33*((cursorPosition%4)-1));
 		}

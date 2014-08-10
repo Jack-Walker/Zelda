@@ -109,7 +109,7 @@ public class HUD : MonoBehaviour
         menuSounds[3].clip = Resources.Load<AudioClip>("Audio/SFX/Menus/OOT_PauseMenu_Turn_Right");
 
         scaleBoost = 1.0f;
-        scaleDir = 0.005f;
+        scaleDir = 0.5f;
         playerOldHearts = player.health;
 
         GameObject heartContainerObject = GameObject.Find("Health");
@@ -188,13 +188,13 @@ public class HUD : MonoBehaviour
     {
         if (scaleBoost > 1.2f)
         {
-            scaleDir = -0.005f;
+            scaleDir = -0.5f;
         }
         if (scaleBoost < 1.0f)
         {
-            scaleDir = 0.005f;
+            scaleDir = 0.5f;
         }
-        scaleBoost += scaleDir;
+        scaleBoost += scaleDir * Time.deltaTime;
 
         int desiredHearts = player.maxHealth / 4;
         // Check if we need to add heart objects

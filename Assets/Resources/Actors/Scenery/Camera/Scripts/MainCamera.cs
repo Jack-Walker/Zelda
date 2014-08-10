@@ -68,8 +68,7 @@ public class MainCamera : MonoBehaviour
 		{
 			isTargeting = false;
 		}
-			isTargeting = false;
-
+			
 		if (player != null && pcam != null)
 		{
 			float upvec = distance / 7.5f;

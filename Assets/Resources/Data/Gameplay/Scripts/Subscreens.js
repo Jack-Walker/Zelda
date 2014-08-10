@@ -279,45 +279,34 @@ function UpdateCursor()
    	    SetCursorColor(Color32(254, 254, 0, 255));
    	    if (Input.GetKeyDown(KeyCode.LeftArrow))
 	    {
-	    	if (!cursorChangeSound.isPlaying)
-	    	{
-	    		cursorPosition--;
-		    	cursorChangeSound.Play();
-		    	if (cursorPosition < 0)
-		    	{
-		    		cursorPosition = 0;
-		    	}
-	    	}
+	    	cursorPosition--;
+		    cursorChangeSound.Play();
+		    if (cursorPosition < 0)
+		    {
+		    	cursorPosition = 0;
+		    }
 	    }
 	    if (Input.GetKeyDown(KeyCode.RightArrow))
 	    {
-		    if (!cursorChangeSound.isPlaying)
-		    {
-		    	cursorPosition++;
-		    	cursorChangeSound.Play();
-		    	if (cursorPosition > 23)
-		    		cursorPosition = 0;
-		    }
+		    cursorPosition++;
+		    cursorChangeSound.Play();
+		    if (cursorPosition > 23)
+		    	cursorPosition = 0;
 	    }
 	    if (Input.GetKeyDown(KeyCode.UpArrow))
 	    {
-		    if (!cursorChangeSound.isPlaying)
-		    {
-		    	cursorPosition -= 6;
-		    	cursorChangeSound.Play();
-		    	if (cursorPosition < 0)
-			    	cursorPosition = 23;
-		    }
+		    
+		    cursorPosition -= 6;
+		    cursorChangeSound.Play();
+		    if (cursorPosition < 0)
+			    cursorPosition = 23;
 	    }
 	    if (Input.GetKeyDown(KeyCode.DownArrow))
 	    {
-		    if (!cursorChangeSound.isPlaying)
-		    {
-		    	cursorPosition += 6;
-		    	cursorChangeSound.Play();
-		    	if (cursorPosition > 23)
-		    		cursorPosition = 0;
-	    	}
+		    cursorPosition += 6;
+		    cursorChangeSound.Play();
+		    if (cursorPosition > 23)
+		    	cursorPosition = 0;
 	    }
     }
     if (pauseMenu.transform.localEulerAngles.y == 180) // Map menu
@@ -347,28 +336,21 @@ function UpdateCursor()
 		
 		if (Input.GetKeyDown(KeyCode.LeftArrow))
 	    {
-	    	if (!cursorChangeSound.isPlaying)
-	    	{
-	    		cursorPosition--;
-		    	cursorChangeSound.Play();
-		    	if (cursorPosition < 0)
-		    	{
-		    		cursorPosition = 0;
-		    	}
-	    	}
+	    	cursorPosition--;
+		    cursorChangeSound.Play();
+		    if (cursorPosition < 0)
+		    {
+		    	cursorPosition = 0;
+		    }
 	    	
 	    }
 	    if (Input.GetKeyDown(KeyCode.RightArrow))
 	    {
-		    if (!cursorChangeSound.isPlaying)
-		    {
-		    	cursorPosition++;
-		    	cursorChangeSound.Play();
-		    	if (cursorPosition > 24)
-		    		cursorPosition = 0;
-		    }
+		    cursorPosition++;
+		    cursorChangeSound.Play();
+		    if (cursorPosition > 24)
+		    	cursorPosition = 0;
 	    }
-	    
     }
     if (pauseMenu.transform.localEulerAngles.y == 0) // Equip menu
     {
@@ -392,52 +374,37 @@ function UpdateCursor()
     	
     	if (Input.GetKeyDown(KeyCode.LeftArrow))
 	    {
-	    	if (!cursorChangeSound.isPlaying)
-	    	{
-	    		cursorPosition--;
-		    	cursorChangeSound.Play();
-		    	if (cursorPosition < 0)
-		    	{
-		    		cursorPosition = 0;
-		    	}
-	    	}
-	    	
+	    	cursorPosition--;
+		    cursorChangeSound.Play();
+		    if (cursorPosition < 0)
+		    {
+		    	cursorPosition = 0;
+		    }
 	    }
 	    if (Input.GetKeyDown(KeyCode.RightArrow))
-	    {
-	    if (!cursorChangeSound.isPlaying)
 	    {
 	    	cursorPosition++;
 	    	cursorChangeSound.Play();
 	    	if (cursorPosition > 15)
 	    		cursorPosition = 0;
 	    }
-	    	
-	    }
 	    if (Input.GetKeyDown(KeyCode.UpArrow))
 	    {
-		    if (!cursorChangeSound.isPlaying)
-		    {
-		    	cursorPosition -= 4;
-		    	cursorChangeSound.Play();
-		    	if (cursorPosition < 0)
-			    	cursorPosition = 15;
-		    }
+		    cursorPosition -= 4;
+		    cursorChangeSound.Play();
+		    if (cursorPosition < 0)
+			    cursorPosition = 15;
 	    }
 	    if (Input.GetKeyDown(KeyCode.DownArrow))
 	    {
-		    if (!cursorChangeSound.isPlaying)
-		    {
-		    	cursorPosition += 4;
-		    	cursorChangeSound.Play();
-		    	if (cursorPosition > 15)
-		    		cursorPosition = 0;
-	    	}
+		    cursorPosition += 4;
+		    cursorChangeSound.Play();
+		    if (cursorPosition > 15)
+		    	cursorPosition = 0;
 	    }
-    	
-    }
     
     //Debug.Log(cursorPosition);
+	}
 }
 
 function Update () {

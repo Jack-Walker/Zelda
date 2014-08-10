@@ -1,9 +1,8 @@
 fileFormatVersion: 2
-guid: cbb518c7b885dcc4bb308556510f3b38
+guid: a830e5d1c4659e448a1769445954b396
 TextureImporter:
   fileIDToRecycleName:
-    21300000: 2-4 Heart
-    21300002: 2-4 Heart1
+    21300000: EI_DekuSeeds
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -39,7 +38,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: .5, y: .5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 500
+  spritePixelsToUnits: 100
   alphaIsTransparency: 1
   textureType: 8
   buildTargetSettings: []

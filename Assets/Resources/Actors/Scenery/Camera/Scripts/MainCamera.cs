@@ -39,6 +39,17 @@ public class MainCamera : MonoBehaviour
 			rotation += 360.0f;
 		else if (rotation >= 360.0f)
 			rotation -= 360.0f;
+		if (!isTargeting)
+		{
+			if (Input.GetKey(KeyCode.J))
+				rotation += 100.0f * Time.deltaTime;
+			else if (Input.GetKey(KeyCode.L))
+				rotation -= 100.0f * Time.deltaTime;
+			if (rotation < 0.0f)
+				rotation += 360.0f;
+			else if (rotation >= 360.0f)
+				rotation -= 360.0f;
+		}
 		if (Input.GetKey(KeyCode.I))
 			distance -= 5.0f * Time.deltaTime;
 		else if (Input.GetKey(KeyCode.K))
@@ -57,6 +68,7 @@ public class MainCamera : MonoBehaviour
 		{
 			isTargeting = false;
 		}
+			isTargeting = false;
 
 		if (player != null && pcam != null)
 		{

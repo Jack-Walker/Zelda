@@ -1,9 +1,8 @@
 fileFormatVersion: 2
-guid: cbb518c7b885dcc4bb308556510f3b38
+guid: 904c670ad84684b4d98b1844e55c4bb7
 TextureImporter:
   fileIDToRecycleName:
-    21300000: 2-4 Heart
-    21300002: 2-4 Heart1
+    21300000: EI_FishingPole
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -39,7 +38,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: .5, y: .5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 500
+  spritePixelsToUnits: 100
   alphaIsTransparency: 1
   textureType: 8
   buildTargetSettings: []

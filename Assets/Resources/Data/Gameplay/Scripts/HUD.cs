@@ -5,6 +5,7 @@ using System.Collections;
 
 public class HUD : MonoBehaviour
 {
+
     private Player player;
     private Camera guiCam;
     private Transform menu;
@@ -13,13 +14,11 @@ public class HUD : MonoBehaviour
     public float rotSpeed = 0.0f;
     private float rotation = 0.0f;
     private float targetRot = 0.0f;
-    private float scaleBoost, scaleDir;
-    private Vector3 baseScale = new Vector3(2.196093f, 2.736454f, 0.9999999f);
-    private int playerOldHearts;
-    public Player.LinkStates oldPlayerState;
-    private int aBoost;
-    private bool aFlip = false;
 
+    private float scaleBoost, scaleDir;
+    private Vector3 baseScale = new Vector3(15.0f, 15.0f, 1.0f);
+    private int playerOldHearts;
+    private int itemMenuCursor = 0;
 
     AudioSource[] menuSounds;
 
@@ -33,14 +32,16 @@ public class HUD : MonoBehaviour
             player = (Player)co.GetComponent("Player");
         co = GameObject.Find("PauseMenu");
         if (co != null)
+        {
             menu = co.transform;
+        }
         if (menu != null)
         {
             menu.gameObject.SetActive(false);
             Color c1 = Color.white, c2 = Color.white;
             for (int i = 0; i < 4; i++)
             {
-                Transform ss = menu.GetChild(i);
+                Transform ss = menu.GetChild(i).Find("Background");
                 if (i == 0)	// Equip
                 {
                     c1 = new Color(.039216f, .196078f, .156863f);
@@ -111,13 +112,13 @@ public class HUD : MonoBehaviour
         scaleDir = 0.005f;
         playerOldHearts = player.health;
 
-        // Test: Remove old hearts
         GameObject heartContainerObject = GameObject.Find("Health");
         for (int i = 0; i < heartContainerObject.transform.childCount; i++)
         {
             GameObject.DestroyObject(heartContainerObject.transform.GetChild(i).gameObject);
         }
     }
+
 
     void Update()
     {
@@ -127,7 +128,6 @@ public class HUD : MonoBehaviour
             if (menu != null)
                 menu.localScale = new Vector3(guiCam.aspect, 1, guiCam.aspect);
             DrawHearts();
-            AButtonDraw();
         }
         if (menu != null)
         {
@@ -178,38 +178,11 @@ public class HUD : MonoBehaviour
         }
     }
 
-    // Todo: Clean code.
-    void AButtonDraw()
+    void UpdateCursor()
     {
-        GameObject aButtonObject = GameObject.Find("AButton");
-        //GameObject aButtonTextObject = GameObject.Find("AButtonText");
 
-        if (aFlip == false)
-        {
-            if (player.state != oldPlayerState)
-            {
-                aFlip = true;
-                aBoost = 4;
-                aButtonObject.transform.Rotate(7, 0, 0);
-                oldPlayerState = player.state;
-            }
-        }
-        if (aFlip == true)
-        {
-            if (aButtonObject.transform.localEulerAngles.x >= 90)
-            {
-                aBoost = -4;
-            }
-            if (aButtonObject.transform.localEulerAngles.x <= 4)
-            {
-                aBoost = 4;
-                aFlip = false;
-                return;
-            }
-            aButtonObject.transform.Rotate(aBoost, 0, 0);
-        }
-        oldPlayerState = player.state;
     }
+
 
     void DrawHearts()
     {
@@ -237,8 +210,8 @@ public class HUD : MonoBehaviour
             {
                 GameObject heartObject = new GameObject("Heart " + i);
                 heartObject.transform.parent = heartContainerObject.transform;
-                heartObject.transform.localPosition = new Vector3(-4.057156f + ((i % 10) * 0.312652f), 3.902238f - ( (i / 10) * 0.407026f), 1.394146e-07f);
-                heartObject.transform.localRotation = new Quaternion(0, 0, 0, 0);
+                heartObject.transform.localPosition = new Vector3(0.0f + ((i % 10) * 0.415f), 0.0f - ((i / 10) * 0.415f), 0.0f);
+                heartObject.transform.localRotation = Quaternion.identity;
                 heartObject.transform.localScale = baseScale;
                 SpriteRenderer spriteRenderer = heartObject.AddComponent<SpriteRenderer>();
                 if (i > (player.health / 4))

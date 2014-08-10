@@ -1,8 +1,8 @@
 fileFormatVersion: 2
-guid: 4f0f2396c36b09e4da9346ed950aaae8
+guid: d01a870314f208d448d21546ff0c6094
 TextureImporter:
   fileIDToRecycleName:
-    21300000: SI_FishingPole
+    21300000: ItemCursor
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -22,7 +22,7 @@ TextureImporter:
   grayScaleToAlpha: 0
   generateCubemap: 0
   seamlessCubemap: 0
-  textureFormat: -3
+  textureFormat: -1
   maxTextureSize: 1024
   textureSettings:
     filterMode: -1

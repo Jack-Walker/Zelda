@@ -13,9 +13,13 @@ public class MainCamera : MonoBehaviour
 	private float rotation = 0.0f;
 	private float distance = 4.5f;
 
-	public bool isTargeting = false;
-	private AudioSource zTargetSound;
+    private float zTargetDistance = 0.0f;
+    private float zTargetRotation = 4.5f;
 
+	public bool isTargeting = false;
+    private AudioSource[] zTargetSounds;
+    private AudioSource battleMusic;
+    private GameObject oldEnemy = null;
 
 
 	void Start()
@@ -25,9 +29,65 @@ public class MainCamera : MonoBehaviour
 			player = po.transform;
 		pcam = transform.FindChild("PositionCam");
 		rcam = transform.FindChild("RotationCam");
-		zTargetSound = gameObject.AddComponent<AudioSource>();
-		zTargetSound.clip = Resources.Load<AudioClip>("Audio/SFX/Menus/OOT_ZTarget_Center1");
+        zTargetSounds = new AudioSource[4];
+		zTargetSounds[0] = gameObject.AddComponent<AudioSource>();
+		zTargetSounds[0].clip = Resources.Load<AudioClip>("Audio/SFX/Menus/OOT_ZTarget_Center1");
+        zTargetSounds[1] = gameObject.AddComponent<AudioSource>();
+        zTargetSounds[1].clip = Resources.Load<AudioClip>("Audio/SFX/Menus/OOT_ZTarget_Enemy");
+        zTargetSounds[2] = gameObject.AddComponent<AudioSource>();
+        zTargetSounds[2].clip = Resources.Load<AudioClip>("Audio/SFX/Menus/OOT_ZTarget_Cancel");
+        battleMusic = gameObject.AddComponent<AudioSource>();
+        battleMusic.clip = Resources.Load<AudioClip>("Audio/BGM/Normal Battle");
 	}
+
+    void EnemyBGMCheck()
+    {
+        foreach (GameObject otherObject in GameObject.FindGameObjectsWithTag("ZTarget_Enemy"))
+        {
+            float dist = Vector3.Distance(otherObject.transform.position, player.transform.position);
+            if (dist < 8.0f)
+            {
+                if (!battleMusic.isPlaying)
+                    battleMusic.Play();
+                float volume = 1.4f / dist;
+                battleMusic.volume = volume;
+                //Debug.Log(volume);            
+            }
+            else
+            {
+                if (battleMusic.isPlaying)
+                    battleMusic.Stop();
+            }
+        }
+    }
+
+    void ZTargetCheck()
+    {
+        foreach (GameObject otherObject in GameObject.FindGameObjectsWithTag("ZTarget_Enemy"))
+        {
+            float dist = Vector3.Distance(otherObject.transform.position, player.transform.position);
+            if (dist < 4.0f)
+            {
+                if (oldEnemy != otherObject)
+                {
+                    oldEnemy = otherObject;
+                    zTargetSounds[1].Play();
+                }
+                player.LookAt(otherObject.transform);
+                zTargetRotation = player.eulerAngles.y;
+                zTargetRotation -= 80;
+                zTargetDistance = dist * 1.5f;
+                if (zTargetDistance <= 3.5f)
+                    zTargetDistance = 3.5f;
+                Debug.Log(zTargetDistance);
+                //Debug.Log("Found an object.");
+            }
+            else
+            {
+                
+            }
+        }
+    }
 	
 	void Update()
 	{
@@ -49,7 +109,18 @@ public class MainCamera : MonoBehaviour
 				rotation += 360.0f;
 			else if (rotation >= 360.0f)
 				rotation -= 360.0f;
+            if (oldEnemy != null)
+            {
+                oldEnemy = null;
+                zTargetSounds[2].Play();
+            }
+            
 		}
+        else
+        {
+            ZTargetCheck();
+        }
+        EnemyBGMCheck();
 		if (Input.GetKey(KeyCode.I))
 			distance -= 5.0f * Time.deltaTime;
 		else if (Input.GetKey(KeyCode.K))
@@ -60,7 +131,7 @@ public class MainCamera : MonoBehaviour
 			distance = 7.5f;
 		if (Input.GetKeyDown(KeyCode.Z))
 		{
-			zTargetSound.Play();
+			zTargetSounds[0].Play();
 			isTargeting = true;
 			rotation = player.eulerAngles.y;
 		}
@@ -71,10 +142,24 @@ public class MainCamera : MonoBehaviour
 			
 		if (player != null && pcam != null)
 		{
-			float upvec = distance / 7.5f;
-			Vector3 targetPos = player.position + 2.0f * upvec * Vector3.up - distance * (Quaternion.AngleAxis(rotation, Vector3.up) * Vector3.forward);
-			Quaternion targetRot = Quaternion.LookRotation(player.position + (.175f + upvec) * Vector3.up - targetPos);
+            float upvec = 0.0f;
+            Vector3 targetPos;
+            Quaternion targetRot;
+            if (isTargeting && oldEnemy != null)
+            {
+                upvec = zTargetDistance / 7.5f;
+                targetPos = player.position + 2.0f * upvec * Vector3.up - zTargetDistance * (Quaternion.AngleAxis(zTargetRotation, Vector3.up) * Vector3.forward);
+                targetRot = Quaternion.LookRotation(player.position + (.175f + upvec) * Vector3.up - targetPos);
+            }
+            else
+            {
+                upvec = distance / 7.5f;
+                targetPos = player.position + 2.0f * upvec * Vector3.up - distance * (Quaternion.AngleAxis(rotation, Vector3.up) * Vector3.forward);
+                targetRot = Quaternion.LookRotation(player.position + (.175f + upvec) * Vector3.up - targetPos);
+            }
+            
 
+            
 			pcam.position = targetPos;
 			pcam.rotation = targetRot;
 			if (rcam != null)

@@ -402,7 +402,6 @@ function UpdateCursor()
 		    if (cursorPosition > 15)
 		    	cursorPosition = 0;
 	    }
-    
     //Debug.Log(cursorPosition);
 	}
 }

@@ -113,6 +113,7 @@ ModelImporter:
     4300038: ob_06031B00
     4300040: ob_060326D0
     9500000: //RootNode
+    11100000: //RootNode
     13700000: ob_06034FA0
     13700002: ob_00035860
     13700004: ob_00035A30
@@ -185,6 +186,6 @@ ModelImporter:
     feetSpacing: 0
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 1
   additionalBone: 0
   userData: 

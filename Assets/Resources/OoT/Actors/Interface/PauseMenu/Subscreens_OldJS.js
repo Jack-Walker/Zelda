@@ -1,5 +1,5 @@
-﻿#pragma strict
-
+#pragma strict
+/*
 public class Item
 {
    public var icon : String;
@@ -411,3 +411,4 @@ function Update () {
 	
 		UpdateCursor();
 }
+*/

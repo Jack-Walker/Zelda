@@ -26,7 +26,7 @@ namespace Assets.Resources.OoT.Actors.Interface.PauseMenu
     {
         Item[] items;
         int cursorPosition;
-        AudioSource cursorChangeSound;
+        AudioSource[] sounds;
         CH_Player player;
         int[] qsX = new int[] { 234, 234, 206, 178, 178, 206, 52, 70, 88, 106, 124, 142, 52, 70, 88, 106, 124, 142, 180, 206, 232, 50, 74, 50, 106 };
         int[] qsY = new int[] { 82, 114, 132, 114, 82, 64, 140, 140, 140, 140, 140, 140, 118, 118, 118, 118, 118, 118, 166, 166, 166, 62, 62, 86, 62 };
@@ -283,8 +283,11 @@ namespace Assets.Resources.OoT.Actors.Interface.PauseMenu
             cursorObject4.layer = 1;
 
             // Load the cursor change sound.
-            cursorChangeSound = cursorObjectParent.AddComponent<AudioSource>();
-            cursorChangeSound.clip = UnityEngine.Resources.Load<AudioClip>("OoT/Audio/SFX/Interface/PauseMenu_Cursor");
+            sounds = new AudioSource[4];
+            sounds[0] = cursorObjectParent.AddComponent<AudioSource>();
+            sounds[0].clip = UnityEngine.Resources.Load<AudioClip>("OoT/Audio/SFX/Interface/PauseMenu_Cursor");
+            sounds[1] = cursorObjectParent.AddComponent<AudioSource>();
+            sounds[1].clip = UnityEngine.Resources.Load<AudioClip>("OoT/Audio/SFX/Interface/PauseMenu_Select");
         }
 
         void UpdateCursor()
@@ -304,7 +307,7 @@ namespace Assets.Resources.OoT.Actors.Interface.PauseMenu
                 if (Input.GetKeyDown(KeyCode.LeftArrow))
                 {
                     cursorPosition--;
-                    cursorChangeSound.Play();
+                    sounds[0].Play();
                     if (cursorPosition < 0)
                     {
                         cursorPosition = 0;
@@ -313,7 +316,7 @@ namespace Assets.Resources.OoT.Actors.Interface.PauseMenu
                 if (Input.GetKeyDown(KeyCode.RightArrow))
                 {
                     cursorPosition++;
-                    cursorChangeSound.Play();
+                    sounds[0].Play();
                     if (cursorPosition > 23)
                         cursorPosition = 0;
                 }
@@ -321,14 +324,14 @@ namespace Assets.Resources.OoT.Actors.Interface.PauseMenu
                 {
 
                     cursorPosition -= 6;
-                    cursorChangeSound.Play();
+                    sounds[0].Play();
                     if (cursorPosition < 0)
                         cursorPosition = 23;
                 }
                 if (Input.GetKeyDown(KeyCode.DownArrow))
                 {
                     cursorPosition += 6;
-                    cursorChangeSound.Play();
+                    sounds[0].Play();
                     if (cursorPosition > 23)
                         cursorPosition = 0;
                 }
@@ -366,7 +369,7 @@ namespace Assets.Resources.OoT.Actors.Interface.PauseMenu
                 if (Input.GetKeyDown(KeyCode.LeftArrow))
                 {
                     cursorPosition--;
-                    cursorChangeSound.Play();
+                    sounds[0].Play();
                     if (cursorPosition < 0)
                     {
                         cursorPosition = 0;
@@ -376,7 +379,7 @@ namespace Assets.Resources.OoT.Actors.Interface.PauseMenu
                 if (Input.GetKeyDown(KeyCode.RightArrow))
                 {
                     cursorPosition++;
-                    cursorChangeSound.Play();
+                    sounds[0].Play();
                     if (cursorPosition > 24)
                         cursorPosition = 0;
                 }
@@ -407,7 +410,7 @@ namespace Assets.Resources.OoT.Actors.Interface.PauseMenu
                 if (Input.GetKeyDown(KeyCode.LeftArrow))
                 {
                     cursorPosition--;
-                    cursorChangeSound.Play();
+                    sounds[0].Play();
                     if (cursorPosition < 0)
                     {
                         cursorPosition = 0;
@@ -416,27 +419,28 @@ namespace Assets.Resources.OoT.Actors.Interface.PauseMenu
                 if (Input.GetKeyDown(KeyCode.RightArrow))
                 {
                     cursorPosition++;
-                    cursorChangeSound.Play();
+                    sounds[0].Play();
                     if (cursorPosition > 15)
                         cursorPosition = 0;
                 }
                 if (Input.GetKeyDown(KeyCode.UpArrow))
                 {
                     cursorPosition -= 4;
-                    cursorChangeSound.Play();
+                    sounds[0].Play();
                     if (cursorPosition < 0)
                         cursorPosition = 15;
                 }
                 if (Input.GetKeyDown(KeyCode.DownArrow))
                 {
                     cursorPosition += 4;
-                    cursorChangeSound.Play();
+                    sounds[0].Play();
                     if (cursorPosition > 15)
                         cursorPosition = 0;
                 }
                 if (Input.GetKeyDown(KeyCode.X))
                 {
                     Debug.Log(cursorPosition);
+                    sounds[1].Play();
                     switch (cursorPosition)
                     {
                         case 9: // Kokiri Tunic

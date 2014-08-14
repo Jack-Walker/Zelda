@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-
-
 public class CH_Player : MonoBehaviour
 {
 	public enum LinkStates
@@ -44,7 +42,7 @@ public class CH_Player : MonoBehaviour
 			return;
 		}
 		mainCamera = GameObject.Find("Position/DefaultCam").camera;
-		cameraController = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<SC_Camera>();
+		cameraController = GameObject.FindGameObjectWithTag("SC_Camera").GetComponent<SC_Camera>();
 		lastPosition = transform.position;
 		maxHealth = 76;
 		health = maxHealth - 3;
@@ -62,7 +60,7 @@ public class CH_Player : MonoBehaviour
 	{
 		FallCheck();
         TunicCheck();
-		switch (state)
+        switch (state)
 		{
 			case LinkStates.Idle:
                 if (!cameraController.isTargeting)
@@ -111,10 +109,11 @@ public class CH_Player : MonoBehaviour
                 {
                     transform.GetChild(0).animation["Run"].speed = 1.5f;
                     transform.GetChild(0).animation.Play("Run");
-                    Debug.Log(transform.GetChild(0).animation["Run"].normalizedTime % 1.0f);
+                    //Debug.Log(transform.GetChild(0).animation["Run"].normalizedTime % 1.0f);
+                    // Test
                     if (transform.GetChild(0).animation["Run"].normalizedTime == (0.0f % 1.0f))
                     {
-                        StepSFX();
+                        //StepSFX();
                     }
                 }
 				UpdateRunning();
@@ -275,7 +274,7 @@ public class CH_Player : MonoBehaviour
 		
 		if (h == 0.0f && v == 0.0f)
 			state = LinkStates.Idle;
-		//StepSFX();
+		StepSFX();
 		ObstacleTest();
 		Vector3 cameraEulerAngles = mainCamera.transform.eulerAngles;
 		cameraEulerAngles.x = 0;

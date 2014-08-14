@@ -113,6 +113,7 @@ public class UI_HUD : MonoBehaviour
 
         scaleBoost = 1.0f;
         scaleDir = 0.5f;
+        //Debug.Log(player.health);
         playerOldHearts = player.health;
 
         GameObject heartContainerObject = GameObject.Find("Health");
@@ -250,7 +251,7 @@ public class UI_HUD : MonoBehaviour
 				if (i > (player.health / 4))
                 {
                     spriteRenderer.sprite = GameEngine.GetSprite(GameEngine.GetActorPath("OoT:UI_HUD"), "0-4 Heart1");
-                    Debug.Log("Upper " + i);
+                    //Debug.Log("Upper " + i);
                 }
                 else if (i == (player.health / 4))
                     {
@@ -276,7 +277,7 @@ public class UI_HUD : MonoBehaviour
                     else
                     {
 					spriteRenderer.sprite = GameEngine.GetSprite(GameEngine.GetActorPath("OoT:UI_HUD"), "4-4 Heart1");
-                        Debug.Log(i);
+                        //Debug.Log(i);
                     }
                 spriteRenderer.renderer.material.shader = Resources.Load<Shader>("_All_/Data/Static/Shaders/Default/Sprite");
                 spriteRenderer.renderer.material.SetColor("_Color", new Color32(253, 98, 98, 255));

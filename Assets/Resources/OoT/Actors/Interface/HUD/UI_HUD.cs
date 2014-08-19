@@ -132,6 +132,7 @@ public class UI_HUD : MonoBehaviour
             if (menu != null)
                 menu.localScale = new Vector3(guiCam.aspect, 1, guiCam.aspect);
             DrawHearts();
+            DrawRupees();
             AButtonDraw();
         }
         if (menu != null)
@@ -140,6 +141,7 @@ public class UI_HUD : MonoBehaviour
             {
                 isShowing = !isShowing;
                 player.enabled = !isShowing;
+                
                 menu.gameObject.SetActive(isShowing);
                 if (isShowing)
                     menuSounds[0].Play();
@@ -217,6 +219,11 @@ public class UI_HUD : MonoBehaviour
         oldPlayerState = player.state;
     }
 
+    void DrawRupees()
+    {
+        TextMesh rupeeText = GameObject.Find("RupeesText").GetComponent<TextMesh>();
+        rupeeText.text = player.rupeeCount.ToString();
+    }
 
     void DrawHearts()
     {

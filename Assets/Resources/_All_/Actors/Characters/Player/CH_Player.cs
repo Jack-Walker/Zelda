@@ -15,7 +15,10 @@ public class CH_Player : MonoBehaviour
 	{
 		Step0,
 		Step1,
-		Step2
+		Step2,
+        Hurt0,
+        Hurt1,
+        Hurt2
 	};
     public enum TunicTypes
     {
@@ -28,9 +31,11 @@ public class CH_Player : MonoBehaviour
 	private SC_Camera cameraController;
 	public LinkStates state;
 	public Vector3 lastPosition;
-	private AudioSource[] linkSounds = new AudioSource[8];
+	public AudioSource[] linkSounds = new AudioSource[8];
 	private int stepCounter = 0;
 	public int health, maxHealth;
+    public int rupeeCount;
+    public float invincibilityTime = 0.0f;
     public TunicTypes currentTunic = TunicTypes.KokiriTunic;
 
 
@@ -46,7 +51,8 @@ public class CH_Player : MonoBehaviour
 		lastPosition = transform.position;
 		maxHealth = 76;
 		health = maxHealth - 3;
-		
+        rupeeCount = 0;
+
 		// Load sound effects
 		linkSounds[(int)LinkSoundsEnum.Step0] = gameObject.AddComponent<AudioSource>();
 		linkSounds[(int)LinkSoundsEnum.Step0].clip = GameEngine.GetSound("OoT:Footsteps/Dirt1");
@@ -54,12 +60,15 @@ public class CH_Player : MonoBehaviour
 		linkSounds[(int)LinkSoundsEnum.Step1].clip = GameEngine.GetSound("OoT:Footsteps/Dirt2");
 		linkSounds[(int)LinkSoundsEnum.Step2] = gameObject.AddComponent<AudioSource>();
 		linkSounds[(int)LinkSoundsEnum.Step2].clip = GameEngine.GetSound("OoT:Footsteps/Dirt3");
+        linkSounds[(int)LinkSoundsEnum.Hurt0] = gameObject.AddComponent<AudioSource>();
+        linkSounds[(int)LinkSoundsEnum.Hurt0].clip = GameEngine.GetSound("OoT:AdultLink/Hurt1");
 	}
 	
 	void FixedUpdate() 
 	{
 		FallCheck();
         TunicCheck();
+        InvincibilityCheck();
         switch (state)
 		{
 			case LinkStates.Idle:
@@ -128,6 +137,14 @@ public class CH_Player : MonoBehaviour
 	void OnCollisionEnter(Collision other)
 	{   
 	}
+
+    void InvincibilityCheck()
+    {   
+        if (invincibilityTime > 0.0f)
+        {
+            invincibilityTime -= Time.deltaTime;
+        }
+    }
 
     void TunicCheck()
     {
@@ -246,9 +263,7 @@ public class CH_Player : MonoBehaviour
 		//Debug.Log("Topmost " + hitTopMost.distance);
 		//Debug.Log("Top " + hitTop.distance);
 		//Debug.Log("Mid " + hitMid.distance);
-		
-		
-		
+
 		//Debug.Log("Topmost " + topmostRaycast);
 		//Debug.Log("Top " + topRaycast);
 		//Debug.Log("Mid " + midRaycast);

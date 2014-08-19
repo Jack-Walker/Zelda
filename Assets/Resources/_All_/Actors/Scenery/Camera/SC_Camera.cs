@@ -85,7 +85,7 @@ public class SC_Camera : MonoBehaviour
 				zTargetDistance = dist * 1.5f;
 				if (zTargetDistance <= 3.5f)
 					zTargetDistance = 3.5f;
-				Debug.Log(zTargetDistance);
+				//Debug.Log(zTargetDistance);
 				//Debug.Log("Found an object.");
 			}
 			else
